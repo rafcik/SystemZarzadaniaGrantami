@@ -10,15 +10,26 @@ class Zakladka_model extends CI_Model {
     public $id;
     public $nazwa;
     public $opis;
-    public $grant;
-    public $podwykonawca;
 
     public function __construct()
     {
         $this->load->database();
     }
 
-    public function get_zakladka($idGrant) {
+    public function get_zakladka($id)
+    {
+        $query = $this->db->get_where('zakladka', array('id' => $id));
+        $ret = $query->row_array();
+
+        var_dump($ret);
+
+        $new = new Zakladka_model();
+        $new->id = $ret['id'];
+        $new->nazwa = $ret['nazwa'];
+        $new->opis = $ret['opis'];
+
+        return $ret;
+        /*
         if ($idGrant != null) {
             $this->db->select('zakladka.*');
             $this->db->from('zakladka');
@@ -40,8 +51,8 @@ class Zakladka_model extends CI_Model {
 
                 array_push($ret, $new);
             }
-
             return  $ret;
         }
+        */
     }
 }

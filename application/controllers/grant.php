@@ -8,8 +8,9 @@ class Grant extends CI_Controller {
         $this->load->model('Grant_model');
     }
 
-    public function index()
+    public function index()         // /grant  lista grantow dla zalogowanego uzytkownika
     {
+        echo 'index';
         $data['Grant_item'] = $this->Grant_model->get_granty();
 
         if (empty($data['Grant_item']))
@@ -26,8 +27,15 @@ class Grant extends CI_Controller {
 
     }
 
-    public function show($id)
+    public function zakladka($nazwa)       // grant/1/nazwa
     {
+        echo 'zakladka nr: ' . $nazwa;
+    }
+
+    public function get_by_id($id)      // grant/1
+    {
+        echo $id;
+
         $data['Grant_item'] = $this->Grant_model->get_grant($id);
 
         if (empty($data['Grant_item']))

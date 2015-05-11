@@ -10,9 +10,10 @@ class Grant_model extends CI_Model
     public $zalozyciel;
     public $budzet;
     public $deadline;
+    public $czasRozpoczecia;
     public $czasRozliczenia;            // liczba tygodni
 
-    // public $podwykonawcy = array();       // tablica podwykonawcow
+    public $podwykonawcy = array();       // tablica podwykonawcow
     public $zakladki = array();           // tablica zakladek
 
 
@@ -35,19 +36,32 @@ class Grant_model extends CI_Model
 
     private function get_podwykonawcy($id)
     {
-        $this->db->select('user.*');
-        $this->db->from('user');
-        $this->db->join('grant_podwykonawca', 'grant_podwykonawca.userId=user.id');
-        $this->db->join('grant', 'grant_podwykonawca.grantId=grant.id');
-        $this->db->where('grant.id', $id);
+        $this->db->select('userId');
+        $this->db->from('podwykonawca');
+        $this->db->where('grantId', $id);
         $query = $this->db->get();
-        return $query->result();
+        $result =  $query->result_array();
+
+        $podwykArr = array();
+
+        //var_dump($result);
+        foreach($result as $row) {
+            $podwyk = new Podwykonawca();
+            array_push($podwykArr, $podwyk->get_user($row['userId']));
+        }
+
+        return $podwykArr;
     }
 
-    private function get_zakladki($id)
+    private function get_zakladki($podwykonawcy)
     {
+        $ret = array();
+
         $this->load->model('Zakladka_model');
-        return $this->Zakladka_model->get_zakladka($id);
+        foreach($podwykonawcy as $podwyk) {
+            array_push($ret, $this->Zakladka_model->get_zakladka($podwyk->id));
+        }
+        return $ret;
     }
 
     public function get_granty()
@@ -70,13 +84,14 @@ class Grant_model extends CI_Model
         $new->nazwa = $ret['nazwa'];
         $new->opis = $ret['opis'];
         $new->budzet = $ret['budzet'];
+        $new->czasRozpoczecia = $ret['czasRozpoczecia'];
         $new->deadline = $ret['deadline'];
         $new->czasRozliczenia = $ret['czasRozliczenia'];
 
         $new->zalozyciel = $this->get_user($ret['zalozycielId']);
         $new->kategoria = $this->get_kategoria($ret['kategoriaId']);
-        //$this->podwykonawcy = $ret['podwykonawcy'] = $this->get_podwykonawcy($id);
-        $new->zakladki = $this->get_zakladki($id);
+        $new->podwykonawcy  = $this->get_podwykonawcy($id);
+        $new->zakladki = $this->get_zakladki($new->podwykonawcy );
 
         return $new;
     }

@@ -37,3 +37,7 @@ class User_model extends CI_Model {
         }
     }
 }
+
+class Podwykonawca extends User_model {
+    public $zakladka;
+}
