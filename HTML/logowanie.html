@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>System Zarządzania Grantami - Logowanie</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div class="logowanie">
+		<p class="tytul">System Zarządzania Grantami</p>
+		<form method="post" action="logowanie.html">
+			<img src="images/user.png" alt="e-mail: " />
+			<input type="email" name="email" value="e-mail" onFocus="if(this.value=='e-mail')this.value=''" onBlur="if(this.value=='')this.value=this.defaultValue" />
+			<br />
+			<img src="images/key.png" alt="hasło: " />
+			<input type="text" name="pass" value="hasło" onFocus="if(this.value==this.defaultValue){this.value='';this.type='password'}" onBlur="if(this.value==''){this.value=this.defaultValue;this.type='text'}"/>
+			<br />
+			<input type="submit" name="zaloguj" value="Zaloguj" />
+		</form>
+		<a href="">
+			<img src="images/sad.png" alt="" />Nie pamiętam hasła
+		</a>
+	</div>
+</body>
+</html>
