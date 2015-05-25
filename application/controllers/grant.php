@@ -51,4 +51,9 @@ class Grant extends CI_Controller {
 
         // $this->load->view('templates/footer');
     }
+
+    public function create()
+    {
+        $this->load->view('Grant/view');
+    }
 }
