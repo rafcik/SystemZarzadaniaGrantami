@@ -1,0 +1,221 @@
+@font-face {
+    font-family: 'Roboto-Thin';
+	src: url("fonts/Roboto-Thin.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: 'Roboto-Light';
+	src: url("fonts/Roboto-Light.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: 'Roboto-Regular';
+	src: url("fonts/Roboto-Regular.ttf") format("truetype");
+}
+
+html, body {
+	font-family: Roboto-Regular;
+	font-size: 15px;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+h1 {
+	font-size: 40px;
+	font-family: Roboto-Thin;
+	margin: 15px 0px;
+	
+}
+
+a:link {
+	color: #0091ea;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #0091ea;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #0091ea;
+	text-decoration: underline;
+}
+
+input[type=submit] {
+	background: #0091ea; 
+	border: 0 none;
+    cursor: pointer;
+	font-size: 18px;
+	font-family: Roboto-Regular;
+	color: #FFF;
+	box-shadow: 1px 1px 2px 1px #8f8f8f;
+	border-radius: 2px;
+	text-transform: uppercase;
+	padding: 6px 10px;
+	margin: 5px;
+}
+
+input[type=submit]:hover {
+	background: #00c853; 
+	border: 0 none;
+    cursor: pointer;
+	font-size: 18px;
+	font-family: Roboto-Regular;
+	color: #FFF;
+	box-shadow: 2px 2px 3px 2px #8f8f8f;
+	border-radius: 2px;
+	text-transform: uppercase;
+	padding: 6px 10px;
+	margin: 5px;
+}
+
+.logowanie {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	border-radius: 10px;
+	box-shadow: 2px 2px 5px #666;
+	background-color: #f7f7f7;
+	width: 500px; margin-left: -250px;
+	height: 500px; margin-top: -250px;
+	text-align: center;
+}
+
+.logowanie .tytul {
+	font-family: Roboto-Thin;
+	font-size: 48px;
+	margin: 40px 0;
+}
+
+.logowanie input[type=email], .logowanie input[type=text], .logowanie input[type=password] {
+	border: none;
+	border-bottom: 2px solid #818181;
+	font-family: Roboto-Thin;
+	font-size: 20px;
+	background: none;
+	width: 230px;
+	margin-bottom: 20px;
+	padding: 5px;
+}
+
+.logowanie input[type=submit] {
+	background: #0091ea url('images/ok.png') no-repeat 10px center;
+    padding-left: 38px;
+	margin: 30px 0 70px 0; 
+}
+
+.logowanie input[type=submit]:hover {
+	background: #00c853 url('images/ok.png') no-repeat 10px center;
+}
+
+.logowanie img {
+	margin-right: 20px;
+	margin-bottom: -10px;
+}
+
+.logowanie a {
+	font-size: 20px;
+}
+
+.logowanie a img {
+	margin: 0 5px -3px 0;
+}
+
+.menu {
+	width: 200px;
+	background: #eeeeee;
+	color: #4c4c4c;
+	font-size: 20px;
+	font-family: Roboto-Light;
+	padding: 0px 10px 5px 20px;
+	box-shadow: 1px 1px 2px 1px #8f8f8f;
+	display: inline-block;
+	height: calc(100% - 65px);
+	position: fixed;
+	overflow: auto;
+	margin-top: 41px;
+}
+
+.menu .user {
+	font-size: 30px;
+}
+
+.menu .powiadomienie {
+	color: #ff2c2c;
+	border-bottom: 1px solid #c5c5c5;
+	padding: 20px;
+	margin-left: -20px;
+	margin-right: -10px;
+}
+
+.menu img {
+	margin-bottom: -3px;
+	margin-right: 20px;
+}
+
+.menu .powiadomienie img {
+	margin-right: 0;
+}
+
+.menu ul , .menu li{
+	list-style: none;
+	margin: 10px 0;
+	padding: 0;
+}
+
+.menu a {
+	color: inherit;
+}
+
+.zakladki {
+	position: fixed;
+	z-index: 1;
+	width: 100%;
+	background: #FFF;
+}
+
+.zakladki .wnetrze {
+	background: #dfdfdf;
+	box-shadow: 1px 1px 2px 1px #8f8f8f;
+	color: #595959;
+	font-size: 17px;
+	text-transform: uppercase;
+	display: inline-block;
+	padding-left: 240px;
+}
+
+.zakladka {
+	padding: 19px;
+	display: inline-block;
+}
+
+.aktywna {
+	border-bottom: 2px solid #0091ea;
+	padding-bottom: 17px;
+	color: #0091ea;
+}
+
+.tresc {
+	display: inline-block;
+	position: absolute;
+	padding: 25px;
+	margin: 41px 0 0 230px;
+}
+
+.ogolne .nazwa {
+	margin: 5px 0;
+}
+
+.ogolne .info {
+	font-size: 20px;
+	font-family: Roboto-Light;
+	margin: 20px 0;
+}
+
+.ogolne p {
+	margin-top: 40px;
+	line-height: 23px;
+	text-align: justify;
+}

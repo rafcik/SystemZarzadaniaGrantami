@@ -43,10 +43,30 @@ class User_model extends CI_Model {
             'imie'=>$this->input->post('name'),
             'nazwisko'=>$this->input->post('surname'),
             'email'=>$this->input->post('email_address'),
-            'password'=>$this->input->post('password'))
+            'password'=>$this->input->post('password')
             );
             $this->db->insert('user',$data);
     }
+	
+	function login($email, $password)
+	{
+		$this->db->select('id, imie, nazwisko, email, password');
+		$this->db->from('user');
+		$this->db->where('email', $email);
+		$this->db->where('password', MD5($password));
+		$this->db->limit(1);
+	 
+		$query = $this->db->get();
+	 
+		if($query->num_rows() == 1)
+		{
+			return $query->result();
+		} 
+		else
+		{
+			return false;
+		}
+	}
 }
 
 class Podwykonawca extends User_model {
