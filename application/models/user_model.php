@@ -36,6 +36,17 @@ class User_model extends CI_Model {
             return $query->result();
         }
     }
+    
+    public function add_user()
+    {
+        $data=array(
+            'imie'=>$this->input->post('name'),
+            'nazwisko'=>$this->input->post('surname'),
+            'email'=>$this->input->post('email_address'),
+            'password'=>$this->input->post('password'))
+            );
+            $this->db->insert('user',$data);
+    }
 }
 
 class Podwykonawca extends User_model {
