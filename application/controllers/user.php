@@ -38,7 +38,8 @@ class User extends CI_Controller {
     public function registration()
     {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('user_name', 'Login', 'trim|required|min_length[4]|xss_clean');
+        $this->form_validation->set_rules('name','Imie','trim|required|max_length[32]');
+        $this->form_validation->set_rules('surname','Nazwisko','trim|required|max_length[32]');
         $this->form_validation->set_rules('email_address', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('password', 'Haslo', 'trim|required|min_length[4]|max_length[32]');
         $this->form_validation->set_rules('con_password', 'Powtorz haslo', 'trim|required|matches[password]');
