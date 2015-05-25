@@ -1,16 +1,16 @@
 @font-face {
     font-family: 'Roboto-Thin';
-	src: url("fonts/Roboto-Thin.ttf") format("truetype");
+	src: url("../fonts/Roboto-Thin.ttf") format("truetype");
 }
 
 @font-face {
     font-family: 'Roboto-Light';
-	src: url("fonts/Roboto-Light.ttf") format("truetype");
+	src: url("../fonts/Roboto-Light.ttf") format("truetype");
 }
 
 @font-face {
     font-family: 'Roboto-Regular';
-	src: url("fonts/Roboto-Regular.ttf") format("truetype");
+	src: url("../fonts/Roboto-Regular.ttf") format("truetype");
 }
 
 html, body {
@@ -68,7 +68,8 @@ input[type=submit]:hover {
 	border-radius: 2px;
 	text-transform: uppercase;
 	padding: 6px 10px;
-	margin: 5px;
+	margin: 4px 6px 6px 4px;
+	transition:0.1s;
 }
 
 .logowanie {
@@ -101,13 +102,14 @@ input[type=submit]:hover {
 }
 
 .logowanie input[type=submit] {
-	background: #0091ea url('images/ok.png') no-repeat 10px center;
+	background: #0091ea url('../images/ok.png') no-repeat 10px center;
     padding-left: 38px;
 	margin: 30px 0 70px 0; 
 }
 
 .logowanie input[type=submit]:hover {
-	background: #00c853 url('images/ok.png') no-repeat 10px center;
+	background: #00c853 url('../images/ok.png') no-repeat 10px center;
+	margin: 29px 1px 71px -1px; 
 }
 
 .logowanie img {
