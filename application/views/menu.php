@@ -1,4 +1,5 @@
 <nav>
+	<img src="<?php echo base_url(); ?>/resources/images/menu.png" alt="" />
 	<div class="powiadomienie">
 		<a href="">
 			<img src="<?php echo base_url(); ?>/resources/images/notifications.png" alt="" />
