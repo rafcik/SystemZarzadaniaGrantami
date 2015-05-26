@@ -68,7 +68,7 @@ input[type=submit]:hover {
 	border-radius: 2px;
 	text-transform: uppercase;
 	padding: 6px 10px;
-	margin: 4px 6px 6px 4px;
+	margin: 5px;
 	transition:0.1s;
 }
 
@@ -134,10 +134,10 @@ nav {
 	padding: 0px 10px 5px 20px;
 	box-shadow: 1px 1px 2px 1px #8f8f8f;
 	display: inline-block;
-	height: calc(100% - 65px);
+	height: 100%;
 	position: fixed;
 	overflow: auto;
-	margin-top: 41px;
+	margin-top: -2px;
 }
 
 nav .user {
@@ -167,7 +167,11 @@ nav ul , nav li{
 	padding: 0;
 }
 
-nav a {
+nav a:link {
+	color: inherit;
+}
+
+nav a:visited {
 	color: inherit;
 }
 
@@ -203,7 +207,11 @@ nav a {
 	display: inline-block;
 	position: absolute;
 	padding: 25px;
-	margin: 41px 0 0 230px;
+	margin: 0 0 0 230px;
+}
+
+.ogolne {
+	margin-top: 41px !important;
 }
 
 .ogolne .nazwa {
@@ -220,4 +228,12 @@ nav a {
 	margin-top: 40px;
 	line-height: 23px;
 	text-align: justify;
+}
+
+footer {
+	width: 100%;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+	text-align: center;
 }
