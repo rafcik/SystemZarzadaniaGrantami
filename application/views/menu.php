@@ -6,7 +6,15 @@
 			1 powiadomienie
 		</a>
 	</div>
-	<p class="user">Użytkownik</p>
+	<p class="user">
+		<?php
+			if($logged_in) {
+				echo "{$logged_in['imie']} {$logged_in['nazwisko']}";
+			} else {
+				echo 'Nie zalogowany';
+			}
+		?>
+	</p>
 	<ul>
 		<li><a href=""><img src="<?php echo base_url(); ?>/resources/images/grants.png" alt="" />Moje granty</a></li>
 		<li><a href=""><img src="<?php echo base_url(); ?>/resources/images/calendar.png" alt="" />Kalendarz</a></li>

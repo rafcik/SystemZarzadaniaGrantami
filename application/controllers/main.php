@@ -11,7 +11,7 @@ class Main extends CI_Controller {
 		$data['logged_in'] = $this->session->userdata('logged_in');
 		
 		$this->load->view('header');
-		$this->load->view('menu');
+		$this->load->view('menu', $data);
 		$this->load->view('main_content', $data);
 		$this->load->view('footer');
 	}
