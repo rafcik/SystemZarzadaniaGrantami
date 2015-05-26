@@ -7,6 +7,7 @@
 	</div>
 	<p class="user">Użytkownik</p>
 	<ul>
+		<li><a href=""><img src="<?php echo base_url(); ?>/resources/images/grants.png" alt="" />Moje granty</a></li>
 		<li><a href=""><img src="<?php echo base_url(); ?>/resources/images/calendar.png" alt="" />Kalendarz</a></li>
 		<li><br /></li>
 		<li><a href=""><img src="<?php echo base_url(); ?>/resources/images/add.png" alt="" />Dodaj grant</a></li>
