@@ -22,7 +22,12 @@
 		<li><a href=""><img src="<?php echo base_url(); ?>/resources/images/add.png" alt="" />Dodaj grant</a></li>
 		<li><a href=""><img src="<?php echo base_url(); ?>/resources/images/edit.png" alt="" />Edytuj granty</a></li>
 		<li><br /></li>
-		<li><a href="index.php?/auth/logout"><img src="<?php echo base_url(); ?>/resources/images/logout.png" alt="" />Wyloguj</a></li>
+		<?php
+			if($logged_in) {
+				$img = base_url().'/resources/images/logout.png';
+				echo "<li><a href='index.php?/auth/logout'><img src='{$img}' alt='' />Wyloguj</a></li>";
+			}	
+		?>
 	</ul>
 </nav>
 <div class="tresc">

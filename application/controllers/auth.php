@@ -4,7 +4,8 @@ class Auth extends CI_Controller {
 
 	public function __construct() {
         parent::__construct();
-			$this->load->model('User_model','',TRUE);
+		
+		$this->load->model('User_model','',TRUE);
     }
 	
 	public function index()
@@ -20,13 +21,14 @@ class Auth extends CI_Controller {
 		//This method will have the credentials validation
 		$this->load->library('form_validation');
  
-		$this->form_validation->set_rules('email', 'email', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_check_database');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');
+		$this->form_validation->set_rules('password', 'Hasło', 'trim|required|xss_clean|callback_check_database');
  
 		if($this->form_validation->run() == FALSE)
 		{
-			//Field validation failed.  User redirected to login page
-			redirect('index.php?/auth', 'refresh');
+			$this->load->view('header');
+			$this->load->view('login');
+			$this->load->view('footer');
 		}
 		else
 		{
@@ -64,21 +66,11 @@ class Auth extends CI_Controller {
 		else
 		{
 			$this->form_validation->set_message('check_database', 'Invalid username or password');
-			return false;
+			
+			return FALSE;
 		}
 	}		
-		
-		
-		/*
-		if($this->input->post('email') == 'granty@lyrmet.pl' && $this->input->post('pass') == 'pass') {
-			$this->session->set_userdata('logged_in', true);
-			redirect('/', 'refresh');
-		} else {
-			redirect('index.php?/auth', 'refresh');
-		}	
-		
-	}
-	*/
+
 	public function logout() 
 	{
 		$this->session->set_userdata('logged_in', false);

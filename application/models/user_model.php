@@ -37,15 +37,17 @@ class User_model extends CI_Model {
         }
     }
     
-    public function add_user()
+    public function add_user($name, $surname, $email, $password)
     {
-        $data=array(
-            'imie'=>$this->input->post('name'),
-            'nazwisko'=>$this->input->post('surname'),
-            'email'=>$this->input->post('email_address'),
-            'password'=>$this->input->post('password')
-            );
-            $this->db->insert('user',$data);
+        $data = array(
+            'imie'=> $name,
+            'nazwisko'=> $surname,
+            'email'=> $email,
+            'password'=> md5($password),
+			'hash'=> md5($password)
+        );
+        
+		$this->db->insert('user', $data);
     }
 	
 	function login($email, $password)
@@ -54,6 +56,25 @@ class User_model extends CI_Model {
 		$this->db->from('user');
 		$this->db->where('email', $email);
 		$this->db->where('password', MD5($password));
+		$this->db->limit(1);
+	 
+		$query = $this->db->get();
+	 
+		if($query->num_rows() == 1)
+		{
+			return $query->result();
+		} 
+		else
+		{
+			return false;
+		}
+	}
+	
+	function getByEmail($email)
+	{
+		$this->db->select('id, imie, nazwisko, email, password');
+		$this->db->from('user');
+		$this->db->where('email', $email);
 		$this->db->limit(1);
 	 
 		$query = $this->db->get();
