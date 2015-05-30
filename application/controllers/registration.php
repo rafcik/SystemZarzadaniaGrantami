@@ -41,8 +41,7 @@ class Registration extends CI_Controller {
 
 			$this->session->set_flashdata('user_data', $data);
 			
-			redirect('index.php?/auth/reg_login');
-			//redirect('/', 'refresh');
+			redirect('auth/reg_login');
 		}
 	}
 	

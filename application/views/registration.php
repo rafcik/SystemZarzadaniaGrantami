@@ -6,7 +6,7 @@
 	</div>
 	
 	<?php 
-		echo form_open("index.php?/registration/register");
+		echo form_open("registration/register");
 	?>
 
 	<label for="imie"> Imie: </label>

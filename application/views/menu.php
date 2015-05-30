@@ -25,7 +25,7 @@
 		<?php
 			if($logged_in) {
 				$img = base_url().'/resources/images/logout.png';
-				echo "<li><a href='index.php?/auth/logout'><img src='{$img}' alt='' />Wyloguj</a></li>";
+				echo "<li><a href='auth/logout'><img src='{$img}' alt='' />Wyloguj</a></li>";
 			}	
 		?>
 	</ul>
