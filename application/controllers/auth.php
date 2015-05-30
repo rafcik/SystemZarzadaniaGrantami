@@ -16,6 +16,44 @@ class Auth extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	public function do_login($email, $password) 
+	{
+		$result = $this->User_model->login($email, $password);
+ 
+		if($result)
+		{
+			$sess_array = array();
+			
+			foreach($result as $row)
+			{
+				$sess_array = array(
+					'id' => $row->id,
+					'email' => $row->email,
+					'imie' => $row->imie,
+					'nazwisko' => $row->nazwisko
+				);
+			
+				$this->session->set_userdata('logged_in', $sess_array);
+			}
+		
+			return TRUE;
+		}
+		else
+		{			
+			return FALSE;
+		}
+	}
+	
+	public function reg_login() {
+		$user_data = $this->session->flashdata('user_data');
+		$email = $user_data['email'];
+		$password = $user_data['password'];
+		
+		$this->do_login($email, $password);
+		
+		redirect('/', 'refresh');
+	}
+	
 	public function login() 
 	{
 		//This method will have the credentials validation
@@ -38,29 +76,11 @@ class Auth extends CI_Controller {
 	}
  
 	function check_database($password)
-	{
-		//Field validation succeeded.  Validate against database
+	{ 
 		$email = $this->input->post('email');
- 
-		//query the database
-		$result = $this->User_model->login($email, $password);
- 
-		if($result)
-		{
-			$sess_array = array();
-			
-			foreach($result as $row)
-			{
-				$sess_array = array(
-					'id' => $row->id,
-					'email' => $row->email,
-					'imie' => $row->imie,
-					'nazwisko' => $row->nazwisko
-				);
-			
-				$this->session->set_userdata('logged_in', $sess_array);
-			}
 		
+		if($this->do_login($email, $password))
+		{		
 			return TRUE;
 		}
 		else
