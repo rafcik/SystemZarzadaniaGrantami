@@ -1,7 +1,7 @@
 <nav>
 	<img src="<?php echo base_url(); ?>/resources/images/menu.png" alt="" />
 	<div class="powiadomienie">
-		<a href="">
+		<a href="calendar">
 			<img src="<?php echo base_url(); ?>/resources/images/notifications.png" alt="" />
 			1 powiadomienie
 		</a>

@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+require_once 'application/libraries/Google/autoload.php';
+
 class Auth extends CI_Controller {
 
 	public function __construct() {
@@ -89,11 +91,35 @@ class Auth extends CI_Controller {
 			
 			return FALSE;
 		}
-	}		
+	}
+	
+	public function calendar() 
+	{
+		require_once 'application/libraries/calendar_init.php';
+
+		if (isset($_GET['code'])) {		
+			$client->authenticate($_GET['code']);  
+			$this->session->set_userdata('token', $client->getAccessToken());
+			$redirect = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
+			header('Location: ' . filter_var($redirect, FILTER_SANITIZE_URL));
+		}
+
+		// Step 1:  The user has not authenticated we give them a link to login    
+		if (!($this->session->userdata('token'))) {
+			$authUrl = $client->createAuthUrl();
+			print "<a class='login' href='$authUrl'>Connect Me!</a>";
+		}    
+
+		// Step 3: We have access we can now create our service
+		if ($this->session->userdata('token')) {			
+			redirect('calendar');
+		}				
+	}
 
 	public function logout() 
 	{
 		$this->session->set_userdata('logged_in', false);
+		$this->session->set_userdata('token', false);
 		redirect('/', 'refresh');
 	}
 }
