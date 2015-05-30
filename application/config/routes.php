@@ -41,9 +41,11 @@
 $route['default_controller'] = "main";
 $route['404_override'] = '';
 
-$route['grant/(.*)/(.*)'] = 'grant/zakladka/$2';
-$route['grant/(.*)'] = 'grant/get_by_id/$1';
-$route['grant'] = 'grant/index';
+
+$route['grant/get/(:num)/(:num)'] = 'grant/zakladka/$1/$2';
+//$route['grant/(.*)'] = 'grant/get_by_id/$1';
+//$route['grant'] = 'grant/index';
+
 
 
 /* End of file routes.php */

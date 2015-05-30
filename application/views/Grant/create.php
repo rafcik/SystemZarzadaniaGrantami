@@ -1,61 +1,71 @@
-<?php
-
-?>
-
-<form id="create_grant" class=""  method="post" action="">
+<form id="create_grant"  method="post" action="insert">
     <div class="form_description">
-        <h2>Untitled Form</h2>
-        <p>This is your form description. Click here to edit.</p>
+        <h2>Dodwanie nowego granta</h2>
     </div>
-    <ul >
 
-        <li id="li_1" >
-            <label class="description" for="element_1">Nazwa* </label>
+
+            <label class="description" for="nazwa">Nazwa* </label>
             <div>
-                <input id="element_1" name="element_1" class="element text medium" type="text" maxlength="255" value=""/>
+                <input id="nazwa" name="nazwa" type="text" maxlength="255" value="" required="To pole jest obowiążkowe"/>
             </div>
+
+        <label class="opis" for="opis">Opis </label>
+        <div>
+            <textarea id="opis" name="opis"  maxlength="500" value="" > </textarea>
+        </div>
+
         </li>
 
-        <label class="description" for="element_2">Opis </label>
+        <label for="kategoria">Kategoria </label>
         <div>
-            <input id="element_2" name="element_2" class="element text medium" type="text" maxlength="255" value=""/>
+            <select id="kategoria_select" name="kategoria_select" onchange="updateId()">
+                <?php
+                    foreach($kat as $k) {
+                    echo '<option id="' . $k->id . '" value="' . $k->id . '">'  . $k->nazwa . '</option>' . "\n";
+                }
+                ?>
+            </select>
         </div>
         </li>
 
-        <label class="description" for="element_3">Kategoria </label>
-        <div>
-            <input id="element_3" name="element_3" class="element text medium" type="text" maxlength="255" value=""/>
-        </div>
-        </li>
+    <input type="text" id="kategoria_id" value="1" style="display: none;" />
 
-        <label class="description" for="element_4">Budżet </label>
-        <div>
-            <input id="element_4" name="element_4" class="element text medium" type="text" maxlength="255" value=""/>
-        </div>
-        </li>
+    <script>
+        function updateId() {
+            var katId = $("#kategoria_select").val();
+            $('#kategoria_id').val(katId);
+        }
+    </script>
 
-        <label class="description" for="element_5">Czas rozpoczęcia </label>
-        <div>
-            <input id="element_5" name="element_5" class="element text medium" type="text" maxlength="255" value=""/>
-        </div>
-        </li>
 
-        <label class="description" for="element_6">Czas zakończenia </label>
+        <label  for="budzet">Budżet (zł)*</label>
         <div>
-            <input id="element_6" name="element_6" class="element text medium" type="text" maxlength="255" value=""/>
+            <input id="budzet" name="budzet" type="number" maxlength="255" step="any" min="0" value="" required="To pole jest obowiążkowe"/>
         </div>
-        </li>
 
-        <label class="description" for="element_7">Czas rozliczenia </label>
+
+        <label  for="czasRozpoczecia">Czas rozpoczęcia* </label>
         <div>
-            <input id="element_7" name="element_7" class="element text medium" type="text" maxlength="255" value=""/>
+            <input id="czasRozpoczecia" name="czasRozpoczecia" type="date" value="2015-06-25" required="To pole jest obowiążkowe"/>
         </div>
-        </li>
 
-        <li class="buttons">
+
+        <label for="czasZakonczenia">Czas zakończenia* </label>
+        <div>
+            <input id="czasZakonczenia" name="czasZakonczenia" type="date" value="2015-06-15" required="To pole jest obowiążkowe"/>
+        </div>
+
+
+        <label for="czasRozliczenia">Czas rozliczenia (liczba tygodni)* </label>
+        <div>
+            <input id="czasRozliczenia" name="czasRozliczenia" type="number"  value="20" required="To pole jest obowiążkowe"/>
+        </div>
+
             <input type="hidden" name="form_id" value="1014494" />
+            <input id="saveForm" class="button_text" type="submit" name="submit" value="Dodaj" />
 
-            <input id="saveForm" class="button_text" type="submit" name="submit" value="Submit" />
-        </li>
-    </ul>
 </form>
+
+
+
+
