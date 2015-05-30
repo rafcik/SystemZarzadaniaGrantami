@@ -1,7 +1,7 @@
 <div class="logowanie">
 	<p class="tytul">System Zarządzania Grantami</p>
 	<?php echo validation_errors(); ?>
-	<form method="post" action="index.php?/auth/login">
+	<form method="post" action="/auth/login">
 		<img src="<?php echo base_url(); ?>resources/images/user.png" alt="e-mail: " />
 		<input type="email" name="email" value="e-mail" onFocus="if(this.value=='e-mail')this.value=''" onBlur="if(this.value=='')this.value=this.defaultValue" />
 		<br />
