@@ -107,7 +107,9 @@ class Auth extends CI_Controller {
 		// Step 1:  The user has not authenticated we give them a link to login    
 		if (!($this->session->userdata('token'))) {
 			$authUrl = $client->createAuthUrl();
-			print "<a class='login' href='$authUrl'>Connect Me!</a>";
+			
+			redirect($authUrl);
+			//print "<a class='login' href='$authUrl'>Connect Me!</a>";
 		}    
 
 		// Step 3: We have access we can now create our service

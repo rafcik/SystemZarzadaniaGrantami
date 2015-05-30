@@ -11,15 +11,14 @@ class Calendar extends CI_Controller {
 	public function index()
 	{
 		if($this->session->userdata('token')) {
-			
 			require_once 'application/libraries/calendar_init.php';
 			
 			$client->setAccessToken($this->session->userdata('token'));
 	
 			$service = new Google_Service_Calendar($client);    
 	
-			$calendarList  = $service->calendarList->listCalendarList();;
-
+			$calendarList = $service->calendarList->listCalendarList();;
+			/*
 			while(true) {
 				foreach ($calendarList->getItems() as $calendarListEntry) {
 
@@ -42,6 +41,15 @@ class Calendar extends CI_Controller {
 					break;
 				}
 			}
+			*/
+			
+			$data['calendarList'] = $calendarList;
+			$data['logged_in'] = $this->session->userdata('logged_in');
+		
+			$this->load->view('header');
+			$this->load->view('menu', $data);
+			$this->load->view('calendar', $data);
+			$this->load->view('footer');
 		} else {
 			redirect('auth/calendar');
 		}
