@@ -5,17 +5,18 @@ class Grant_model extends CI_Model
     public $id;
     public $nazwa;
     public $opis;
-
-    public $kategoria;
-    public $zalozyciel;
+    public $kategoriaId;
+    public $zalozycielId;
     public $budzet;
-    public $deadline;
     public $czasRozpoczecia;
+    public $deadline;
     public $czasRozliczenia;            // liczba tygodni
 
     public $podwykonawcy = array();       // tablica podwykonawcow
     public $zakladki = array();           // tablica zakladek
 
+    public $kategoria;
+    public $zalozyciel;
 
     public function __construct()
     {
@@ -44,7 +45,6 @@ class Grant_model extends CI_Model
 
         $podwykArr = array();
 
-        //var_dump($result);
         foreach($result as $row) {
             $podwyk = new Podwykonawca();
             array_push($podwykArr, $podwyk->get_user($row['userId']));
@@ -64,12 +64,19 @@ class Grant_model extends CI_Model
         return $ret;
     }
 
-    public function get_granty()
+    public function get_granty($idUser)
     {
-        $ret = array();                         // tymczasowo
-        array_push($ret, $this->get_grant(1));
-        array_push($ret, $this->get_grant(2));
+        $this->db->select('id');
+        $this->db->from('grant');
+        $this->db->where('zalozycielId', $idUser);
+        $query = $this->db->get();
+        $result =  $query->result_array();
 
+        $ret = array();
+
+        foreach($result as $row) {
+            array_push($ret, $this->get_grant($row['id']));
+        }
         return $ret;
     }
 
@@ -94,5 +101,31 @@ class Grant_model extends CI_Model
         $new->zakladki = $this->get_zakladki($new->podwykonawcy );
 
         return $new;
+    }
+
+    function insert_entry()
+    {
+        echo '<pre>';
+        //var_dump($_POST);
+        echo '</pre>';
+        $entry = array();
+
+        $entry['nazwa'] = $_POST['nazwa'];
+        $entry['opis'] = $_POST['opis'];
+        $entry['kategoriaId'] = $_POST['kategoria_select'];
+        $entry['zalozycielId'] = 1;
+        $entry['budzet'] = $_POST['budzet'];
+        $entry['czasRozpoczecia'] = $_POST['czasRozpoczecia'];
+        $entry['deadline'] = $_POST['czasZakonczenia'];
+        $entry['czasRozliczenia'] = $_POST['czasRozliczenia'];
+
+        $user = $this->session->userdata('logged_in');
+        $entry['zalozycielId'] = $user['id'];
+
+        echo '<pre>';
+           // var_dump($this);
+        echo '</pre>';
+
+        $this->db->insert('grant', $entry);
     }
 }
