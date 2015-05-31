@@ -6,12 +6,14 @@ class Grant extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('Grant_model');
+        $this->load->model('User_model');
+        $this->load->model('Zakladka_model');
+        $this->load->model('Podwykonawca_model');
     }
 
     public function index()         // /grant  lista grantow dla zalogowanego uzytkownika
     {
         $data['logged_in'] = $this->session->userdata('logged_in');
-
         $data['Grant_item'] = $this->Grant_model->get_granty($data['logged_in']['id']);
 
         if (empty($data['Grant_item']))
@@ -71,13 +73,40 @@ class Grant extends CI_Controller {
 
     public function insert()
     {
-        echo 'ctr - insert()';
-
         $this->load->database();
         $this->load->model('Grant_model');
         $this->Grant_model->insert_entry();
 
         redirect('/');
-
     }
+
+    public function newtab($idGrant)
+    {
+        $data['logged_in'] = $this->session->userdata('logged_in');
+        $data['title'] = "Tworzenie nowej zakładki";
+        $data['Users'] = $this->User_model->get_user();
+        $data['idGrant'] = $idGrant;
+
+        $this->load->view('header');
+        $this->load->view('menu', $data);
+        $this->load->view('Grant/newtab', $data);
+        $this->load->view('footer');
+    }
+
+    public function insert_tab()
+    {
+        echo '<pre>';
+        var_dump($_POST);
+        echo '</pre>';
+
+        $this->load->database();
+
+        $this->load->model('Zakladka_model');
+        $idZakladki = $this->Zakladka_model->insert_entry();
+
+        $this->load->model('Podwykonawca_model');
+        $this->Podwykonawca_model->insert_entry($idZakladki);
+
+        redirect('/');
+}
 }

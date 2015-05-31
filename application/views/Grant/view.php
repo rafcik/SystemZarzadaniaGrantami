@@ -2,21 +2,35 @@
 
 <h3>Zakladki grant:</h3>
 
+<!--
+echo '<pre>';
+var_dump($user);
+echo '</pre>';
+-->
+
 <ul>
-<?php foreach($Grant_item->zakladki as $zakladka): ?>
-    <li><a href="<?php echo base_url() . 'grant/get/' . $Grant_item->id ?>/<?php echo $zakladka['id'] ?>"><?php echo $zakladka['nazwa'] ?></a></li>
-        <?php echo $zakladka['opis'] ?>
-<?php endforeach ?>
+    <?php
+    for($i = 0; $i < count($Grant_item->podwykonawcyUserModel); $i++)
+    {
+        echo '<li>Nazwa: <a href="' . base_url() . 'grant/get/' . $Grant_item->id . '/' . $Grant_item->zakladki[$i]['id'] . '">' . $Grant_item->zakladki[$i]['nazwa'] . '</a>';
+        echo '<br />Opis: ' . $Grant_item->zakladki[$i]['opis'];
+        echo '<br />Właściciel podzakladki: ' . $Grant_item->podwykonawcyUserModel[$i]->imie . ' ' . $Grant_item->podwykonawcyUserModel[$i]->nazwisko . ' - ' . $Grant_item->podwykonawcyUserModel[$i]->email;
+        echo '</li>';
+    }
+    ?>
 </ul>
-<!-- <?php var_dump($Grant_item->zakladki); ?> -->
+
+<a href="<?php echo base_url() . 'grant/get/' . $Grant_item->id . '/newtab' ?>">Nowa zakładka</a>
 
 
     <div class="main">
         <ul>
-            <?php foreach ($Grant_item->podwykonawcy as $podwyk ): ?>
+<!--
+            <?php foreach ($Grant_item->podwykonawcyUserModel as $podwyk ): ?>
                 <li>Tab: <?php echo $podwyk->imie . ' ' . $podwyk->nazwisko ?>
                 </li>
             <?php endforeach ?>
+-->
 
             <h3>Nazwa: <?php echo $Grant_item->nazwa?> </h3>
             <li>Opis: <?php echo $Grant_item->opis ?></li>

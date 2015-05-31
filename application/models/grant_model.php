@@ -12,7 +12,8 @@ class Grant_model extends CI_Model
     public $deadline;
     public $czasRozliczenia;            // liczba tygodni
 
-    public $podwykonawcy = array();       // tablica podwykonawcow
+    public $podwykonawcy = array();             // tablica podwykonawcow (z tabeli podwykonawcy)
+    public $podwykonawcyUserModel = array();    // podwykonawcy (user model)
     public $zakladki = array();           // tablica zakladek
 
     public $kategoria;
@@ -21,6 +22,7 @@ class Grant_model extends CI_Model
     public function __construct()
     {
         $this->load->database();
+        $this->load->model('Zakladka_model');
     }
 
     private function get_user($id)
@@ -47,10 +49,39 @@ class Grant_model extends CI_Model
 
         foreach($result as $row) {
             $podwyk = new Podwykonawca();
-            array_push($podwykArr, $podwyk->get_user($row['userId']));
+            array_push($podwykArr, $podwyk->get_podwykonawca($row['userId']));
         }
 
         return $podwykArr;
+    }
+
+    private function get_podwykonawcyUserModel($id)
+    {
+        $this->db->select('userId');
+        $this->db->from('podwykonawca');
+        $this->db->where('grantId', $id);
+        $query = $this->db->get();
+        $result =  $query->result_array();
+
+        $podwykUMArr = array();
+
+        foreach($result as $row) {
+            $this->db->select('*');
+            $this->db->from('user');
+            $this->db->where('id', $row['userId']);
+            $query2 = $this->db->get();
+
+            $userRow = $query2->result_array();
+
+            $user = new User_model();
+            $user->imie = $userRow[0]['imie'];
+            $user->nazwisko = $userRow[0]['nazwisko'];
+            $user->email = $userRow[0]['email'];
+
+            array_push($podwykUMArr, $user);
+        }
+
+        return $podwykUMArr;
     }
 
     private function get_zakladki($podwykonawcy)
@@ -59,7 +90,7 @@ class Grant_model extends CI_Model
 
         $this->load->model('Zakladka_model');
         foreach($podwykonawcy as $podwyk) {
-            array_push($ret, $this->Zakladka_model->get_zakladka($podwyk->id));
+            array_push($ret, $this->Zakladka_model->get_zakladka($podwyk->zakladkaId));
         }
         return $ret;
     }
@@ -98,6 +129,7 @@ class Grant_model extends CI_Model
         $new->zalozyciel = $this->get_user($ret['zalozycielId']);
         $new->kategoria = $this->get_kategoria($ret['kategoriaId']);
         $new->podwykonawcy  = $this->get_podwykonawcy($id);
+        $new->podwykonawcyUserModel  = $this->get_podwykonawcyUserModel($id);
         $new->zakladki = $this->get_zakladki($new->podwykonawcy );
 
         return $new;
@@ -108,6 +140,7 @@ class Grant_model extends CI_Model
         echo '<pre>';
         //var_dump($_POST);
         echo '</pre>';
+
         $entry = array();
 
         $entry['nazwa'] = $_POST['nazwa'];

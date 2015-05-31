@@ -92,4 +92,27 @@ class User_model extends CI_Model {
 
 class Podwykonawca extends User_model {
     public $zakladka;
+
+    public $grantId;
+    public $userId;
+    public $zakladkaId;
+
+    public function get_podwykonawca($id = false) {
+        if ($id != null) {
+            $query = $this->db->get_where('podwykonawca', array('userId' => $id));
+            $ret =  $query->row_array();
+
+            $new = new Podwykonawca();
+
+            $new->grantId = $ret['grantId'];
+            $new->userId = $ret['userId'];
+            $new->zakladkaId = $ret['zakladkaId'];
+
+            return $new;
+        }
+        else {
+            $query = $this->db->get('podwykonawca');
+            return $query->result();
+        }
+    }
 }
