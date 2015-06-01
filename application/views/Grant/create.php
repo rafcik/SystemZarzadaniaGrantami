@@ -46,13 +46,13 @@
 
         <label  for="czasRozpoczecia">Czas rozpoczęcia* </label>
         <div>
-            <input id="czasRozpoczecia" name="czasRozpoczecia" type="date" value="2015-06-25" required="To pole jest obowiążkowe"/>
+            <input id="czasRozpoczecia" name="czasRozpoczecia" type="date" value="<?php echo date('Y-m-d');?>" required="To pole jest obowiążkowe"/>
         </div>
 
 
         <label for="czasZakonczenia">Czas zakończenia* </label>
         <div>
-            <input id="czasZakonczenia" name="czasZakonczenia" type="date" value="2015-06-15" required="To pole jest obowiążkowe"/>
+            <input id="czasZakonczenia" name="czasZakonczenia" type="date" value="<?php echo date('Y-m-d', strtotime(date('Y-m-d').' + 140 days'));?>" required="To pole jest obowiążkowe"/>
         </div>
 
 
@@ -63,7 +63,6 @@
 
             <input type="hidden" name="form_id" value="1014494" />
             <input id="saveForm" class="button_text" type="submit" name="submit" value="Dodaj" />
-
 </form>
 
 
