@@ -20,7 +20,19 @@ echo '</pre>';
     ?>
 </ul>
 
+<!--
 <a href="<?php echo base_url() . 'grant/get/' . $Grant_item->id . '/newtab' ?>">Nowa zakładka</a>
+-->
+
+<input id="hiddenIdGrant" type="hidden" value="<?php echo $Grant_item->id; ?>" />
+<input id="newTabBtn" type="submit" value="Nowa zakładka" />
+
+<script type="text/javascript">
+    document.getElementById("newTabBtn").onclick = function () {
+        var idGrant = $("#hiddenIdGrant").val();
+        location.href = "/grant/get/" + idGrant + '/newtab';
+    };
+</script>
 
 
     <div class="main">
@@ -45,3 +57,8 @@ echo '</pre>';
         </ul>
 
     </div>
+
+<form id="delete_form" method="post" action="<?php echo base_url() . 'grant/'; ?>delete">
+    <input type="hidden" name="idGrant" value="<?php echo $Grant_item->id; ?>" />
+    <input type="submit" value="Usuń ten grant" />
+</form>

@@ -47,9 +47,11 @@ class Grant extends CI_Controller {
 
     public function zakladka($idGrant, $idZakladki)       // grant/1/nazwa
     {
-        echo "id grant: " . $idGrant . ' id zakladki: ' . $idZakladki;
+        //echo "id grant: " . $idGrant . ' id zakladki: ' . $idZakladki;
         $data['logged_in'] = $this->session->userdata('logged_in');
-        //$data['Grant_item'] = $this->Grant_model->get_grant($id);
+        $data['Grant_item'] = $this->Grant_model->get_grant($idGrant);
+
+        $data['idZakladki'] = $idZakladki;
 
         //$data['title'] = $nazwa;
         $this->load->view('header');
@@ -95,20 +97,32 @@ class Grant extends CI_Controller {
 
     public function insert_tab()
     {
-        echo '<pre>';
-        //var_dump($_POST);
-        echo '</pre>';
-
         $this->load->database();
 
         $this->load->model('Zakladka_model');
         $idZakladki = $this->Zakladka_model->insert_entry();
 
-        echo '<b>' . $idZakladki . '</b>';
-
         $this->load->model('Podwykonawca_model');
         $this->Podwykonawca_model->insert_entry($idZakladki);
 
-        redirect('/');
+        redirect('grant/get/' . $_POST['idGrant'] );
+    }
+
+    public function delete()
+    {
+        $this->load->database();
+        $this->load->model('Grant_model');
+        $this->Grant_model->delete_entry($_POST['idGrant']);
+
+        redirect('/grant');
+    }
+
+    public function delete_tab()
+    {
+        $this->load->database();
+        $this->load->model('Zakladka_model');
+        $this->Zakladka_model->delete_entry($_POST['idZakladki']);
+
+        redirect('/grant/get/' . $_POST['idGrant']);
     }
 }

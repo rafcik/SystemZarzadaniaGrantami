@@ -167,4 +167,9 @@ class Grant_model extends CI_Model
 
         $this->db->insert('grant', $entry);
     }
+
+    function delete_entry($id)
+    {
+        $this->db->delete('grant', array('id' => $id));
+    }
 }

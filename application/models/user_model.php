@@ -98,7 +98,8 @@ class Podwykonawca extends User_model {
     public $userId;
     public $zakladkaId;
 
-    public function get_podwykonawca($id = false) {
+    public function get_podwykonawca($id = false)
+    {
         if ($id != null) {
             $query = $this->db->get_where('podwykonawca', array('userId' => $id));
             $ret =  $query->row_array();
@@ -111,7 +112,8 @@ class Podwykonawca extends User_model {
 
             return $new;
         }
-        else {
+        else
+        {
             $query = $this->db->get('podwykonawca');
             return $query->result();
         }
