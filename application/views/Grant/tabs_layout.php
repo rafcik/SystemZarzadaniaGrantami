@@ -1,8 +1,16 @@
+<div id="tabContainer" class="zakladki">
     <a id="tab-general" class="zakladka" href="<?php echo base_url() . 'grant/get/' . $Grant_item->id . '/general' ?>">Ogólne</a>
     <a id="tab-budget" class="zakladka" href="<?php echo base_url() . 'grant/get/' . $Grant_item->id . '/budget' ?>">Budżet</a>
     <a id="tab-calendar" class="zakladka" href="<?php echo base_url() . 'grant/get/' . $Grant_item->id . '/calendar' ?>">Kalendarz</a>
     <a id="tab-files" class="zakladka" href="<?php echo base_url() . 'grant/get/' . $Grant_item->id . '/files' ?>">Pliki</a>
 
+    <?php
+    for($i = 0; $i < count($Grant_item->podwykonawcyUserModel); $i++)
+    {
+        echo '<a class="zakladka" href="' . base_url() . 'grant/get/' . $Grant_item->id . '/' . $Grant_item->zakladki[$i]['id'] . '">' . $Grant_item->zakladki[$i]['nazwa'] . '</a>';
+    }
+    ?>
+</div>
 <script type="text/javascript">
     $( document ).ready(function() {
         var tabName = $("#tabName").html();
