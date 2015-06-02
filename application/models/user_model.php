@@ -93,6 +93,7 @@ class User_model extends CI_Model {
 class Podwykonawca extends User_model {
     public $zakladka;
 
+    public $podwykId;
     public $grantId;
     public $userId;
     public $zakladkaId;

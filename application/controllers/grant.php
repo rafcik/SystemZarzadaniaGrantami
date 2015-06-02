@@ -96,7 +96,7 @@ class Grant extends CI_Controller {
     public function insert_tab()
     {
         echo '<pre>';
-        var_dump($_POST);
+        //var_dump($_POST);
         echo '</pre>';
 
         $this->load->database();
@@ -104,9 +104,11 @@ class Grant extends CI_Controller {
         $this->load->model('Zakladka_model');
         $idZakladki = $this->Zakladka_model->insert_entry();
 
+        echo '<b>' . $idZakladki . '</b>';
+
         $this->load->model('Podwykonawca_model');
         $this->Podwykonawca_model->insert_entry($idZakladki);
 
         redirect('/');
-}
+    }
 }
