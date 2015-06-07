@@ -37,6 +37,8 @@ class Grant extends CI_Controller {
         {
             show_404();
         }
+		
+		$this->session->set_userdata('grant_id', $id);
 
         $data['title'] = $data['Grant_item']->nazwa;
         $this->load->view('header');

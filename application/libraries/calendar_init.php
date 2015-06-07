@@ -10,5 +10,5 @@
 	$client->setRedirectUri($redirect_uri);
 	$client->setAccessType('offline');   // Gets us our refreshtoken
 
-	$client->setScopes(array('https://www.googleapis.com/auth/calendar.readonly'));
+	$client->setScopes(array('https://www.googleapis.com/auth/calendar'));
 ?>
