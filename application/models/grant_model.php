@@ -15,7 +15,8 @@ class Grant_model extends CI_Model
     public $podwykonawcy = array();             // tablica podwykonawcow (z tabeli podwykonawcy)
     public $podwykonawcyUserModel = array();    // podwykonawcy (user model)
     public $zakladki = array();           // tablica zakladek
-
+	public $events = array();				//tablica eventów
+	
     public $kategoria;
     public $zalozyciel;
 
@@ -59,6 +60,36 @@ class Grant_model extends CI_Model
         }
 
         return $podwykArr;
+    }
+	
+	public function get_events($grant_id, $year, $month)
+    {
+		$this->load->model('Events_model');
+		
+		$time_from = $year.'-'.$month.'-01 00:00:00';
+		$time_to = $year.'-'.($month+1).'-01 00:00:00';
+		
+		if($month == 12) {
+			$time_from = $year.'-'.$month.'-01 00:00:00';
+			$time_to = ($year+1).'-01-01 00:00:00';
+		}
+		
+        $query = $this->db->get_where('events', array('grant_id' => $grant_id, 'date >=' => $time_from, 'date <' => $time_to));
+		
+        $result =  $query->result_array();
+
+        $events = array();
+
+        foreach($result as $row) {
+            $event = new Events_model();
+            $event->id = $row['id'];
+            $event->date_time = $row['date'];
+            $event->description = $row['description'];
+            $event->grant_id = $row['grant_id'];
+            array_push($events, $event);
+        }
+
+        return $events;
     }
 
     private function get_podwykonawcyUserModel($id)

@@ -9,6 +9,7 @@ class Grant extends CI_Controller {
         $this->load->model('User_model');
         $this->load->model('Zakladka_model');
         $this->load->model('Podwykonawca_model');
+		$this->load->model('Events_model');
     }
 
     public function index()         // /grant  lista grantow dla zalogowanego uzytkownika
@@ -71,6 +72,33 @@ class Grant extends CI_Controller {
         {
             $this->load->view('header');
             $this->load->view('menu', $data);
+			
+			
+			$prefs['template'] = '
+				{table_open}<table class="calendar">{/table_open}
+				{week_day_cell}<th class="day_header">{week_day}</th>{/week_day_cell}
+				{cal_cell_content}<span class="day_listing">{day}</span>&nbsp;&bull; {content}&nbsp;{/cal_cell_content}
+				{cal_cell_content_today}<div class="today"><span class="day_listing">{day}</span>&bull; {content}</div>{/cal_cell_content_today}
+				{cal_cell_no_content}<span class="day_listing">{day}</span>&nbsp;{/cal_cell_no_content}
+				{cal_cell_no_content_today}<div class="today"><span class="day_listing">{day}</span></div>{/cal_cell_no_content_today}
+			';
+
+			$this->load->library('calendar', $prefs);
+			
+			$year = 2015;
+			$month = 6;
+			
+			$events = $this->Grant_model->get_events($idGrant, $year, $month);
+			
+			$data2 = array();
+			
+			foreach($events as $event) {
+				$data2[date('j', strtotime($event->date_time))] = $event->description;
+			}
+
+			$data['calendar'] = $this->calendar->generate($year, $month, $data2);
+			
+			
             $this->load->view('Grant/tab_calendar', $data);
             $this->load->view('footer');
         }
