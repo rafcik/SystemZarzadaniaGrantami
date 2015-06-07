@@ -39,17 +39,23 @@ class Grant_model extends CI_Model
 
     private function get_podwykonawcy($id)
     {
-        $this->db->select('userId');
-        $this->db->from('podwykonawca');
-        $this->db->where('grantId', $id);
-        $query = $this->db->get();
+        //$this->db->select('userId');
+        //$this->db->from('podwykonawca');
+        //$this->db->where('grantId', $id);
+
+        $query = $this->db->get_where('podwykonawca', array('grantId' => $id));
+        //$this->db->get();
         $result =  $query->result_array();
 
         $podwykArr = array();
 
         foreach($result as $row) {
             $podwyk = new Podwykonawca();
-            array_push($podwykArr, $podwyk->get_podwykonawca($row['userId']));
+            $podwyk->podwykId = $row['podwykId'];
+            $podwyk->grantId = $row['grantId'];
+            $podwyk->userId = $row['userId'];
+            $podwyk->zakladkaId = $row['zakladkaId'];
+            array_push($podwykArr, $podwyk );
         }
 
         return $podwykArr;
@@ -160,5 +166,10 @@ class Grant_model extends CI_Model
         echo '</pre>';
 
         $this->db->insert('grant', $entry);
+    }
+
+    function delete_entry($id)
+    {
+        $this->db->delete('grant', array('id' => $id));
     }
 }

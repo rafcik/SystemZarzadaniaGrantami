@@ -47,17 +47,47 @@ class Grant extends CI_Controller {
         $this->load->view('footer');
     }
 
-    public function zakladka($idGrant, $idZakladki)       // grant/1/nazwa
+    public function zakladka($idGrant, $idZakladki)       // grant/get/1/budget
     {
-        echo "id grant: " . $idGrant . ' id zakladki: ' . $idZakladki;
         $data['logged_in'] = $this->session->userdata('logged_in');
-        //$data['Grant_item'] = $this->Grant_model->get_grant($id);
+        $data['Grant_item'] = $this->Grant_model->get_grant($idGrant);
+        $data['idZakladki'] = $idZakladki;
 
-        //$data['title'] = $nazwa;
-        $this->load->view('header');
-        $this->load->view('menu', $data);
-        $this->load->view('Grant/tab', $data);
-        $this->load->view('footer');
+        if ($idZakladki == 'general')
+        {
+            $this->load->view('header');
+            $this->load->view('menu', $data);
+            $this->load->view('Grant/tab_general', $data);
+            $this->load->view('footer');
+        }
+        else if ($idZakladki == 'budget')
+        {
+            $this->load->view('header');
+            $this->load->view('menu', $data);
+            $this->load->view('Grant/tab_budget', $data);
+            $this->load->view('footer');
+        }
+        else if ($idZakladki == 'calendar')
+        {
+            $this->load->view('header');
+            $this->load->view('menu', $data);
+            $this->load->view('Grant/tab_calendar', $data);
+            $this->load->view('footer');
+        }
+        else if ($idZakladki == 'files')
+        {
+            $this->load->view('header');
+            $this->load->view('menu', $data);
+            $this->load->view('Grant/tab_files', $data);
+            $this->load->view('footer');
+        }
+        else
+        {
+            $this->load->view('header');
+            $this->load->view('menu', $data);
+            $this->load->view('Grant/tab', $data);
+            $this->load->view('footer');
+        }
     }
 
     public function create()        // grant/create
@@ -88,6 +118,7 @@ class Grant extends CI_Controller {
         $data['title'] = "Tworzenie nowej zakładki";
         $data['Users'] = $this->User_model->get_user();
         $data['idGrant'] = $idGrant;
+        $data['Grant_item'] = $this->Grant_model->get_grant($idGrant);
 
         $this->load->view('header');
         $this->load->view('menu', $data);
@@ -97,10 +128,6 @@ class Grant extends CI_Controller {
 
     public function insert_tab()
     {
-        echo '<pre>';
-        var_dump($_POST);
-        echo '</pre>';
-
         $this->load->database();
 
         $this->load->model('Zakladka_model');
@@ -109,6 +136,24 @@ class Grant extends CI_Controller {
         $this->load->model('Podwykonawca_model');
         $this->Podwykonawca_model->insert_entry($idZakladki);
 
-        redirect('/');
-}
+        redirect('grant/get/' . $_POST['idGrant'] );
+    }
+
+    public function delete()
+    {
+        $this->load->database();
+        $this->load->model('Grant_model');
+        $this->Grant_model->delete_entry($_POST['idGrant']);
+
+        redirect('/grant');
+    }
+
+    public function delete_tab()
+    {
+        $this->load->database();
+        $this->load->model('Zakladka_model');
+        $this->Zakladka_model->delete_entry($_POST['idZakladki']);
+
+        redirect('/grant/get/' . $_POST['idGrant']);
+    }
 }

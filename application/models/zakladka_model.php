@@ -34,4 +34,9 @@ class Zakladka_model extends CI_Model {
 
         return $this->db->insert_id();
     }
+
+    public function delete_entry($id)
+    {
+        $this->db->delete('zakladka', array('id' => $id));
+    }
 }
