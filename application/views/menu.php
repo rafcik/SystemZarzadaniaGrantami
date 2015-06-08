@@ -16,21 +16,36 @@
 		?>
 	</p>
 	<ul>
-		<li><a href="<?php echo base_url() . 'grant' ?>"><img src="<?php echo base_url(); ?>/resources/images/grants.png" alt="" />Moje granty</a></li>
+		
 	<?php
 	/*
 		<li><a href="<?php echo base_url() . 'calendar' ?>"><img src="<?php echo base_url(); ?>/resources/images/calendar.png" alt="" />Kalendarz</a></li>
 	*/
 	?>
-		<li><br /></li>
-		<li><a href="<?php echo base_url() . 'grant/create' ?>"><img src="<?php echo base_url(); ?>/resources/images/add.png" alt="" />Dodaj grant</a></li>
-		<li><a href=""><img src="<?php echo base_url(); ?>/resources/images/edit.png" alt="" />Edytuj granty</a></li>
+		
+		<?php 
+			if($logged_in) {
+		?>
+			<li><a href="<?php echo base_url() . 'grant' ?>"><img src="<?php echo base_url(); ?>/resources/images/grants.png" alt="" />Moje granty</a></li>
+			<li><br /></li>
+			<li><a href="<?php echo base_url() . 'grant/create' ?>"><img src="<?php echo base_url(); ?>/resources/images/add.png" alt="" />Dodaj grant</a></li>
+			<li><a href=""><img src="<?php echo base_url(); ?>/resources/images/edit.png" alt="" />Edytuj granty</a></li>
+		<?php 
+			}
+		?>
+		
 		<li><br /></li>
 		<?php
 			if($logged_in) {
 				$img = base_url().'/resources/images/logout.png';
 				echo "<li><a href='".base_url()."auth/logout'><img src='{$img}' alt='' />Wyloguj</a></li>";
-			}	
+			} else {
+				$img = base_url().'/resources/images/login.png';
+				echo "<li><a href='".base_url()."auth'><img src='{$img}' alt='Zaloguj' />Zaloguj</a></li>";
+				
+				$img = base_url().'/resources/images/register.png';
+				echo "<li><a href='".base_url()."registration'><img src='{$img}' alt='' />Rejestracja</a></li>";
+			}
 		?>
 	</ul>
 </nav>

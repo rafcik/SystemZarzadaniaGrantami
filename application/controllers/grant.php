@@ -48,7 +48,7 @@ class Grant extends CI_Controller {
         $this->load->view('footer');
     }
 
-    public function zakladka($idGrant, $idZakladki)       // grant/get/1/budget
+    public function zakladka($idGrant, $idZakladki, $year, $month)       // grant/get/1/budget
     {
         $data['logged_in'] = $this->session->userdata('logged_in');
         $data['Grant_item'] = $this->Grant_model->get_grant($idGrant);
@@ -69,10 +69,9 @@ class Grant extends CI_Controller {
             $this->load->view('footer');
         }
         else if ($idZakladki == 'calendar')
-        {
-            $this->load->view('header');
-            $this->load->view('menu', $data);
-			
+        {		
+			$this->load->view('header');
+			$this->load->view('menu', $data);			
 			
 			$prefs['template'] = '
 				{table_open}<table class="calendar">{/table_open}
@@ -83,24 +82,31 @@ class Grant extends CI_Controller {
 				{cal_cell_no_content_today}<div class="today"><span class="day_listing">{day}</span></div>{/cal_cell_no_content_today}
 			';
 
-			$this->load->library('calendar', $prefs);
+			$prefs['show_next_prev'] = TRUE;
+			$prefs['next_prev_url'] = base_url().'grant/get/'.$idGrant.'/calendar';
 			
-			$year = 2015;
-			$month = 6;
+			$this->load->library('calendar', $prefs);
+
+			if(!isset($year) || $year == '0') {
+				$year = date('Y', time());
+			}
+			
+			if(!isset($month) || $month == '0') {
+				$month = date('n', time());
+			}
 			
 			$events = $this->Grant_model->get_events($idGrant, $year, $month);
 			
 			$data2 = array();
-			
 			foreach($events as $event) {
 				$data2[date('j', strtotime($event->date_time))] = $event->description;
 			}
 
 			$data['calendar'] = $this->calendar->generate($year, $month, $data2);
 			
-			
-            $this->load->view('Grant/tab_calendar', $data);
-            $this->load->view('footer');
+			$this->load->view('Grant/tab_calendar', $data);
+			$this->load->view('footer');
+		
         }
         else if ($idZakladki == 'files')
         {

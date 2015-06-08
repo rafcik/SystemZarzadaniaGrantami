@@ -42,8 +42,9 @@ $route['default_controller'] = "main";
 $route['404_override'] = '';
 
 $route['grant/get/(:num)/newtab'] = 'grant/newtab/$1';
-$route['grant/get/(:num)'] = 'grant/zakladka/$1/general';
-$route['grant/get/(:num)/(:any)'] = 'grant/zakladka/$1/$2';
+$route['grant/get/(:num)'] = 'grant/zakladka/$1/general/0/0';
+$route['grant/get/(:num)/(:any)'] = 'grant/zakladka/$1/$2/0/0';
+$route['grant/get/(:num)/(:any)/(:num)/(:num)'] = 'grant/zakladka/$1/$2/$3/$4';
 //$route['grant/(.*)'] = 'grant/get_by_id/$1';
 //$route['grant'] = 'grant/index';
 
