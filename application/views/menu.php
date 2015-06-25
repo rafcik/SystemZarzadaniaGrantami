@@ -1,11 +1,13 @@
 <nav>
 	<img src="<?php echo base_url(); ?>/resources/images/menu.png" alt="" />
+	<!-- 
 	<div class="powiadomienie">
 		<a href="">
 			<img src="<?php echo base_url(); ?>/resources/images/notifications.png" alt="" />
 			1 powiadomienie
 		</a>
 	</div>
+	-->
 	<p class="user">
 		<?php
 			if($logged_in) {
@@ -29,7 +31,7 @@
 			<li><a href="<?php echo base_url() . 'grant' ?>"><img src="<?php echo base_url(); ?>/resources/images/grants.png" alt="" />Moje granty</a></li>
 			<li><br /></li>
 			<li><a href="<?php echo base_url() . 'grant/create' ?>"><img src="<?php echo base_url(); ?>/resources/images/add.png" alt="" />Dodaj grant</a></li>
-			<li><a href=""><img src="<?php echo base_url(); ?>/resources/images/edit.png" alt="" />Edytuj granty</a></li>
+		<!-- 	<li><a href=""><img src="<?php echo base_url(); ?>/resources/images/edit.png" alt="" />Edytuj granty</a></li>	-->
 		<?php 
 			}
 		?>
