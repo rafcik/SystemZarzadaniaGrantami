@@ -117,6 +117,23 @@ class Grant extends CI_Controller {
         }
         else
         {
+			$this->load->database();
+			$this->load->model('Wpis_model');
+			
+			$wpisy = $this->Wpis_model->get_wpisy($idGrant, $idZakladki);
+			$data['wpisy'] = array();
+			
+			$this->load->model('User_model');
+		
+			foreach($wpisy as $wpis) {
+				$user = $this->User_model->get_user($wpis['user_id']);
+				
+				$wpis['user_name'] = $user->imie . ' ' . $user->nazwisko;
+				
+				array_push($data['wpisy'], $wpis);
+			}
+			
+			
             $this->load->view('header');
             $this->load->view('menu', $data);
             $this->load->view('Grant/tab', $data);
@@ -189,5 +206,36 @@ class Grant extends CI_Controller {
         $this->Zakladka_model->delete_entry($_POST['idZakladki']);
 
         redirect('/grant/get/' . $_POST['idGrant']);
+    }
+	
+    public function add_event()
+    {	 
+		$this->load->database();
+		$this->load->model('Events_model');
+		$this->Events_model->insert_entry($_POST['eventDate'], $_POST['opis'], $_POST['idGrant']);
+		
+        redirect('/grant/get/' . $_POST['idGrant'] . '/calendar');
+    }
+	
+	public function add_wpis()
+    {
+		$userData = $this->session->userdata('logged_in');
+		
+		$this->load->database();
+		$this->load->model('Wpis_model');
+		$this->Wpis_model->add_wpis($_POST['idGrant'], $_POST['idZakladki'], $_POST['wpis'], $userData['id']);
+		
+        redirect('/grant/get/' . $_POST['idGrant'] . '/' . $_POST['idZakladki']);
+    }
+
+	public function delete_wpis()
+    {
+		$userData = $this->session->userdata('logged_in');
+		
+		$this->load->database();
+		$this->load->model('Wpis_model');
+		$this->Wpis_model->delete_wpis($_POST['wpisId']);
+		
+        redirect('/grant/get/' . $_POST['idGrant'] . '/' . $_POST['idZakladki']);
     }
 }

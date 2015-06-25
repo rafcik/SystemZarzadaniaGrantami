@@ -198,13 +198,10 @@ class Grant_model extends CI_Model
 
         $this->db->insert('grant', $entry);
 		
-		echo '1';
 		$this->insert_events($user['id']);
-		echo '2';
     }
 	
 	function insert_events($user_id) {
-		echo '3';
         $this->db->select('id');
         $this->db->from('grant');
         $this->db->where('zalozycielId', $user_id);
@@ -217,11 +214,8 @@ class Grant_model extends CI_Model
 		$grant_id = $ret['id'];
 		
 		$this->load->model('Events_model');
-        echo '4';
 		$this->Events_model->insert_entry($_POST['czasRozpoczecia'], 'Rozpoczęcie grantu', $grant_id);
-		echo '5';
 		$this->Events_model->insert_entry($_POST['czasZakonczenia'], 'Zakończenie grantu', $grant_id);
-		echo '6';
 	}
 
     function delete_entry($id)
