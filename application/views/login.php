@@ -1,7 +1,8 @@
-<div class="logowanie">
+<div class="logowanie"><div class="logowanie-ramka"">
 	<p class="tytul">System Zarządzania Grantami</p>
-	<?php echo validation_errors(); ?>
+	<p class="podtytul">Logowanie</p>
 	<form method="post" action="/auth/login">
+		<?php echo validation_errors(); ?>
 		<img src="<?php echo base_url(); ?>resources/images/user.png" alt="e-mail: " />
 		<input type="email" name="email" value="e-mail" onFocus="if(this.value=='e-mail')this.value=''" onBlur="if(this.value=='')this.value=this.defaultValue" />
 		<br />
@@ -13,4 +14,4 @@
 	<a href="">
 		<img src="<?php echo base_url(); ?>resources/images/sad.png" alt="" />Nie pamiętam hasła
 	</a>
-</div>
+</div></div>
