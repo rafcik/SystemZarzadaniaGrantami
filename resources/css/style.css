@@ -16,7 +16,7 @@
 html, body {
 	font-family: Roboto-Regular;
 	font-size: 15px;
-	height: 100%;
+	
 	margin: 0;
 	padding: 0;
 }
@@ -79,15 +79,26 @@ input[type=submit]:hover {
 	border-radius: 10px;
 	box-shadow: 2px 2px 5px #666;
 	background-color: #f7f7f7;
-	width: 500px; margin-left: -250px;
-	height: 500px; margin-top: -250px;
+	width: 480px; margin-left: -240px;
+	height: 470px; margin-top: -235px;
 	text-align: center;
 }
 
 .logowanie .tytul {
 	font-family: Roboto-Thin;
-	font-size: 48px;
-	margin: 40px 0;
+	font-size: 45px;
+	margin: 25px 0 20px 0;
+}
+
+.logowanie .podtytul {
+	font-family: Roboto-Thin;
+	font-size: 28px;
+	margin: 0 0 20px 0;
+	
+}
+
+.logowanie form {
+	height: 230px;
 }
 
 .logowanie input[type=email], .logowanie input[type=text], .logowanie input[type=password] {
@@ -104,12 +115,12 @@ input[type=submit]:hover {
 .logowanie input[type=submit] {
 	background: #0091ea url('../images/ok.png') no-repeat 10px center;
     padding-left: 38px;
-	margin: 30px 0 70px 0; 
+	margin: 15px 0 0 0; 
 }
 
 .logowanie input[type=submit]:hover {
 	background: #00c853 url('../images/ok.png') no-repeat 10px center;
-	margin: 29px 1px 71px -1px; 
+	margin: 14px 1px 0 -1px; 
 }
 
 .logowanie img {
@@ -125,6 +136,93 @@ input[type=submit]:hover {
 	margin: 0 5px -3px 0;
 }
 
+.rejestracja {
+	border-radius: 10px;
+	box-shadow: 2px 2px 5px #666;
+	background-color: #f7f7f7;
+	width: 480px;
+	margin: 20px auto 50px auto;
+	padding: 1px;
+	text-align: center;
+}
+
+.rejestracja .tytul {
+	font-family: Roboto-Thin;
+	font-size: 45px;
+	margin: 25px 0 20px 0;
+}
+
+.rejestracja .podtytul {
+	font-family: Roboto-Thin;
+	font-size: 28px;
+	margin: 0 0 15px 0;	
+}
+
+.rejestracja form {
+	margin-bottom: 15px;
+}
+
+.rejestracja label {
+	display: inline-block;
+	width: 120px;
+	text-align: right;
+	margin-right: 20px;
+	margin-left: -20px;
+	font-size: 17px;
+	font-family: Roboto-Light;
+}
+
+.rejestracja input[type=email], .rejestracja input[type=text], .rejestracja input[type=password] {
+	border: none;
+	border-bottom: 2px solid #818181;
+	font-family: Roboto-Thin;
+	font-size: 17px;
+	background: none;
+	width: 230px;
+	margin-bottom: 10px;
+	padding: 5px;
+}
+
+.rejestracja input[type=submit] {
+	background: #0091ea url('../images/ok.png') no-repeat 10px center;
+    padding-left: 38px;
+	margin: 15px 0 0 0; 
+}
+
+.rejestracja input[type=submit]:hover {
+	background: #00c853 url('../images/ok.png') no-repeat 10px center;
+	margin: 14px 1px 0 -1px; 
+}
+
+.niezalogowany {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	border-radius: 10px;
+	box-shadow: 2px 2px 5px #666;
+	background-color: #f7f7f7;
+	width: 480px; margin-left: -240px;
+	height: 400px; margin-top: -225px;
+	text-align: center;
+	font-family: Roboto-Thin;
+	padding: 25px;
+}
+
+.niezalogowany h1 {
+	font-family: Roboto-Thin;
+	font-weight: normal;
+	font-size: 45px;
+	margin: 30px 0;
+}
+
+.niezalogowany h2 {
+	font-family: Roboto-Thin;
+	font-size: 20px;
+	line-height: 35px;
+	margin: 0 0 15px 0;
+	
+}
+
 nav {
 	width: 200px;
 	background: #eeeeee;
@@ -138,6 +236,7 @@ nav {
 	position: fixed;
 	overflow: auto;
 	margin-top: -2px;
+	z-index: 1;
 }
 
 nav .user {
@@ -206,8 +305,10 @@ nav a:visited {
 .tresc {
 	display: inline-block;
 	position: absolute;
-	padding: 25px;
+	padding: 0 25px 25px 25px;
 	margin: 0 0 0 230px;
+	height: calc(100% - 50px);
+	width: calc(100% - 280px);
 }
 
 .ogolne {
@@ -232,13 +333,12 @@ nav a:visited {
 
 footer {
 	width: 100%;
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
+    position: fixed;
+	bottom: 0;
 	text-align: center;
+	background: #ffffff;
+	z-index: -1;
 }
-
-
 
 .calendar {
     font-family: Arial, Verdana, Sans-serif;
@@ -284,3 +384,39 @@ div.today {
     background: #E9EFF7;
     height: 100%;
 } 
+
+#create_grant label {
+	display: inline-block;
+	width: 230px;
+	text-align: right;
+	padding-right: 10px;
+}
+
+#create_grant input[type=text], #create_grant input[type=number], #create_grant input[type=date], #create_grant select, #create_grant textarea {
+	width: calc(100% - 400px);
+	min-width: 250px;
+	margin: 5px 0;
+	font-size: 15px;
+}
+.logowanie input[type=email], .logowanie input[type=text], .logowanie input[type=password] {
+	border: none;
+	border-bottom: 2px solid #818181;
+	font-family: Roboto-Thin;
+	font-size: 20px;
+	background: none;
+	width: 230px;
+	margin-bottom: 20px;
+	padding: 5px;
+}
+
+#tabContainer {
+	background: #dfdfdf;
+	margin-left: -25px;
+	box-shadow: 1px 1px 2px 1px #8f8f8f;
+	z-index: 0;
+}
+
+#tabName {
+	visibility: hidden;
+	height: 40px;
+}
