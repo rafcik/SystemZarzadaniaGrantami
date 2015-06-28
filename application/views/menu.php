@@ -1,54 +1,29 @@
+<?php 
+if($logged_in) {
+?>
 <nav>
-	<img src="<?php echo base_url(); ?>/resources/images/menu.png" alt="" />
-	<!-- 
+	<!--<img src="<?php echo base_url(); ?>/resources/images/menu.png" alt="" />
 	<div class="powiadomienie">
 		<a href="">
 			<img src="<?php echo base_url(); ?>/resources/images/notifications.png" alt="" />
 			1 powiadomienie
 		</a>
-	</div>
-	-->
+	</div>-->
 	<p class="user">
 		<?php
-			if($logged_in) {
-				echo "{$logged_in['imie']} {$logged_in['nazwisko']}";
-			} else {
-				echo 'Nie zalogowany';
-			}
+			echo "{$logged_in['imie']} {$logged_in['nazwisko']}";
 		?>
 	</p>
 	<ul>
-		
-	<?php
-	/*
-		<li><a href="<?php echo base_url() . 'calendar' ?>"><img src="<?php echo base_url(); ?>/resources/images/calendar.png" alt="" />Kalendarz</a></li>
-	*/
-	?>
-		
-		<?php 
-			if($logged_in) {
-		?>
-			<li><a href="<?php echo base_url() . 'grant' ?>"><img src="<?php echo base_url(); ?>/resources/images/grants.png" alt="" />Moje granty</a></li>
-			<li><br /></li>
-			<li><a href="<?php echo base_url() . 'grant/create' ?>"><img src="<?php echo base_url(); ?>/resources/images/add.png" alt="" />Dodaj grant</a></li>
-		<!-- 	<li><a href=""><img src="<?php echo base_url(); ?>/resources/images/edit.png" alt="" />Edytuj granty</a></li>	-->
-		<?php 
-			}
-		?>
-		
+		<li><a href="<?php echo base_url() . 'grant' ?>"><img src="<?php echo base_url(); ?>/resources/images/grants.png" alt="" />Moje granty</a></li>
+		<li><br /></li>
+		<li><a href="<?php echo base_url() . 'grant/create' ?>"><img src="<?php echo base_url(); ?>/resources/images/add.png" alt="" />Dodaj grant</a></li>
 		<li><br /></li>
 		<?php
-			if($logged_in) {
-				$img = base_url().'/resources/images/logout.png';
-				echo "<li><a href='".base_url()."auth/logout'><img src='{$img}' alt='' />Wyloguj</a></li>";
-			} else {
-				$img = base_url().'/resources/images/login.png';
-				echo "<li><a href='".base_url()."auth'><img src='{$img}' alt='Zaloguj' />Zaloguj</a></li>";
-				
-				$img = base_url().'/resources/images/register.png';
-				echo "<li><a href='".base_url()."registration'><img src='{$img}' alt='' />Rejestracja</a></li>";
-			}
+			$img = base_url().'/resources/images/logout.png';
+			echo "<li><a href='".base_url()."auth/logout'><img src='{$img}' alt='' />Wyloguj</a></li>";
 		?>
 	</ul>
 </nav>
+<?php } ?>
 <div class="tresc">
