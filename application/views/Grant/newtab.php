@@ -9,7 +9,7 @@ require_once('tabs_layout.php');
         <input id="nazwa" name="nazwa" type="text" maxlength="255" value="" required="To pole jest obowiązkowe"/>
 	<br />
 	
-    <label class="opis" for="opis">Opis&nbsp; &nbsp;</label>
+    <label class="opis" for="opis">Opis&nbsp; &nbsp;<br /><br /></label>
         <textarea id="opis" name="opis"  maxlength="500" value="" > </textarea>
 	<br />
 
