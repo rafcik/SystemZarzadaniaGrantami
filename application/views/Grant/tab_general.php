@@ -6,7 +6,7 @@
 <h1><?php echo $Grant_item->nazwa?> </h1>
 
 <p><span class="tytul">Kategoria:</span> <?php echo $Grant_item->kategoria->nazwa ?></p>
-<p><span class="tytul">Zalożyciel:</span> <?php echo $Grant_item->zalozyciel->imie . ' ' . $Grant_item->zalozyciel->nazwisko ?></p>
+<p><span class="tytul">Założyciel:</span> <?php echo $Grant_item->zalozyciel->imie . ' ' . $Grant_item->zalozyciel->nazwisko ?></p>
 
 <?php $i = 0;
 	foreach ($Grant_item->podwykonawcyUserModel as $podwyk ) {
@@ -18,7 +18,8 @@
 	}
 ?>
 
-<?php if(!empty($Grant_item->opis)) echo "<p><span class=\"tytul\">Opis:</span> ". $Grant_item->opis . "</p>" ?>
+<?php if((empty($Grant_item->opis) || $pos = strpos($Grant_item->opis, " ")))
+	echo "<p><span class=\"tytul\">Opis:</span> ". $Grant_item->opis . "</p>" ?>
 
 <p><span class="tytul">Budżet:</span> <?php echo $Grant_item->budzet ?></p>
 <p><span class="tytul">Czas rozpoczęcia:</span> <?php echo $Grant_item->czasRozpoczecia ?></p>
