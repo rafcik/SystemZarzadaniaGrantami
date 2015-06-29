@@ -22,10 +22,15 @@ html, body {
 }
 
 h1 {
-	font-size: 40px;
+	font-size: 45px;
 	font-family: Roboto-Thin;
 	margin: 15px 0px;
-	
+}
+
+h2 {
+	font-size: 25px;
+	font-family: Roboto-Thin;
+	margin: 15px 0px;
 }
 
 a:link {
@@ -70,6 +75,14 @@ input[type=submit]:hover {
 	padding: 6px 10px;
 	margin: 5px;
 	transition:0.1s;
+}
+
+textarea {
+	font-family: Roboto-Regular;
+}
+
+input[type=text], input[type=date], input[type=number], input[type=email] {
+	font-family: Roboto-Regular;
 }
 
 .logowanie {
@@ -392,12 +405,20 @@ div.today {
 	padding-right: 10px;
 }
 
-#create_grant input[type=text], #create_grant input[type=number], #create_grant input[type=date], #create_grant select, #create_grant textarea {
+#create_grant input[type=text], #create_grant input[type=number], #create_grant input[type=date], #create_grant select {
 	width: calc(100% - 400px);
 	min-width: 250px;
 	margin: 5px 0;
 	font-size: 15px;
 }
+#create_grant textarea {
+	width: calc(100% - 400px);
+	min-width: 250px;
+	margin: 5px 0;
+	font-size: 15px;
+	height: 57px;
+}
+
 .logowanie input[type=email], .logowanie input[type=text], .logowanie input[type=password] {
 	border: none;
 	border-bottom: 2px solid #818181;
@@ -419,4 +440,11 @@ div.today {
 #tabName {
 	visibility: hidden;
 	height: 40px;
+}
+
+.granty_lista {
+	font-size: 13px;
+	font-style: italic;
+	margin: -10px 0 -5px 0;
+	padding: 0;
 }
