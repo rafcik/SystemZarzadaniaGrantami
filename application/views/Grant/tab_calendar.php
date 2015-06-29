@@ -3,7 +3,7 @@
 ?>
 <h3 id="tabName">Kalendarz</h3>
 
-<input id="newEvent" style="position: relative; left: calc(100% - 190px);" type="submit" value="Dodaj wydarzenie" onclick="$('#dialog').dialog('open');" />
+<input id="newEvent" style="position: relative; left: calc(100% - 190px);" type="submit" value="Dodaj wydarzenie" onclick="$('#dialog').dialog('open');" /><br /><br />
 	
 <div id="dialog" title="Dodaj wydarzenie">
 	<form id="add_event_form" method="post" action="<?php echo base_url() . 'grant/'; ?>add_event">
