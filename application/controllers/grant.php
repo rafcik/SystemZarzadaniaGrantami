@@ -17,10 +17,6 @@ class Grant extends CI_Controller {
         $data['logged_in'] = $this->session->userdata('logged_in');
         $data['Grant_item'] = $this->Grant_model->get_granty($data['logged_in']['id']);
 
-        if (empty($data['Grant_item']))
-        {
-            show_404();
-        }
         $data['title'] = "Granty";
 
         $this->load->view('header');
