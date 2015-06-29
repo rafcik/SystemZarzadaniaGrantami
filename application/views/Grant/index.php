@@ -1,32 +1,14 @@
-<h2><?php echo $title ?></h2>
+<h1><?php echo $title ?></h1>
 
-
-<div class="main">
-<?php foreach($Grant_item as $grant): ?>
+<?php if(!empty($Grant_item))
+foreach($Grant_item as $grant){ ?>
     <ul>
-        <li><a href="<?php echo base_url() . 'grant/get/' . $grant->id ?> "><?php echo $grant->nazwa?> </a></li>
-
-        <?php foreach ($grant->zakladki as $zakladka ): ?>
-            <li>Tab: <?php echo $zakladka['nazwa'] . ' ' . $zakladka['opis'] ?>
-
-               <!-- Podwykonawca: <?php echo $zakladka->podwykonawca->imie . ' ' . $zakladka->podwykonawca->nazwisko ?> -->
-            </li>
-        <?php endforeach ?>
-
-        <?php echo $grant->opis ?>
-        <!--
-        <li> Kategoria: <?php echo $grant->kategoria->nazwa ?></li>
-        <li> Zalożyciel: <?php echo $grant->zalozyciel->imie . ' ' . $grant->zalozyciel->nazwisko ?> </li>
-        <li> Data rozpoczęcia: <?php echo $grant->czasRozpoczecia ?></li>
-        <li> Data zakończenia: <?php echo $grant->deadline ?></li>
-
-        <li> Budzet: <?php echo $grant->budzet ?> zł</li>
-        <li> Czas rozliczenia: <?php echo $grant->czasRozliczenia ?> tygodni</li>
-        -->
+        <li><h2><a href="<?php echo base_url() . 'grant/get/' . $grant->id ?> "><?php echo $grant->nazwa?></a></h2></li>
+        
+        <p class="granty_lista">Kategoria: <?php echo $grant->kategoria->nazwa ?> &bull;
+        Zalożyciel: <?php echo $grant->zalozyciel->imie . ' ' . $grant->zalozyciel->nazwisko ?> &bull;
+        Data zakończenia: <?php echo $grant->deadline ?> </p>
+		<p><?php echo $grant->opis ?></p>		
     </ul>
-<?php endforeach ?>
-
-</div>
-
-
-
+<?php } 
+else echo "<h2>Nie posiadasz jeszcze żadnych grantów.</h2><h2>Dodaj jakiś wybierając z menu opcję \"Dodaj grant\".</h2>"; ?>
