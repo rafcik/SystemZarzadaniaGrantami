@@ -3,7 +3,7 @@
     <label class="description" for="nazwa">Nazwa <span style="color:red">*</span></label>
     <input id="nazwa" name="nazwa" type="text" maxlength="255" value="" required="To pole jest obowiążkowe"/>
 	<br />
-    <label class="opis" for="opis">Opis&nbsp; &nbsp;</label>
+    <label class="opis" for="opis">Opis&nbsp; &nbsp;<br /><br /></label>
     <textarea id="opis" name="opis"  maxlength="500" value="" > </textarea>
 	<br />
     <label for="kategoria">Kategoria <span style="color:red">*</span></label>
