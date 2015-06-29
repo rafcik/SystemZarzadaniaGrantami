@@ -7,9 +7,11 @@ require_once('tabs_layout.php');
     <h1>Dodwanie nowej zakładki</h1>
     <label class="description" for="nazwa">Nazwa <span style="color:red">*</span> </label>
         <input id="nazwa" name="nazwa" type="text" maxlength="255" value="" required="To pole jest obowiązkowe"/>
-
+	<br />
+	
     <label class="opis" for="opis">Opis&nbsp; &nbsp;</label>
         <textarea id="opis" name="opis"  maxlength="500" value="" > </textarea>
+	<br />
 
     <label for="owner">Właściciel zakładki&nbsp; &nbsp;</label>
         <select id="owner_select" name="owner_select">
