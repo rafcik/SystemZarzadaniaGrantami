@@ -3,13 +3,30 @@
 ?>
 <h3 id="tabName">Ogólne</h3>
 
+<h1><?php echo $Grant_item->nazwa?> </h1>
 
-<!--
-<a href="<?php echo base_url() . 'grant/get/' . $Grant_item->id . '/newtab' ?>">Nowa zakładka</a>
--->
+<p><span class="tytul">Kategoria:</span> <?php echo $Grant_item->kategoria->nazwa ?></p>
+<p><span class="tytul">Zalożyciel:</span> <?php echo $Grant_item->zalozyciel->imie . ' ' . $Grant_item->zalozyciel->nazwisko ?></p>
+
+<?php $i = 0;
+	foreach ($Grant_item->podwykonawcyUserModel as $podwyk ) {
+		if(!($Grant_item->zalozyciel->imie == $podwyk->imie && $Grant_item->zalozyciel->nazwisko == $podwyk->nazwisko)) {
+			if($i == 0) echo "<p><span class=\"tytul\">Podwykonawcy:</span> " . $podwyk->imie . " " . $podwyk->nazwisko;
+			else echo ", " . $podwyk->imie . " " . $podwyk->nazwisko;
+			$i = 2;
+		}
+	}
+?>
+
+<?php if(!empty($Grant_item->opis)) echo "<p><span class=\"tytul\">Opis:</span> ". $Grant_item->opis . "</p>" ?>
+
+<p><span class="tytul">Budżet:</span> <?php echo $Grant_item->budzet ?></p>
+<p><span class="tytul">Czas rozpoczęcia:</span> <?php echo $Grant_item->czasRozpoczecia ?></p>
+<p><span class="tytul">Deadline:</span> <?php echo $Grant_item->deadline ?></p>
+<p><span class="tytul">Czas na rozliczenie:</span> <?php echo $Grant_item->czasRozliczenia ?> tygodni</p><br />
 
 <input id="hiddenIdGrant" type="hidden" value="<?php echo $Grant_item->id; ?>" />
-<input id="newTabBtn" type="submit" value="Nowa zakładka" />
+<input id="newTabBtn" type="submit" value="Dodaj nową zakładkę" />
 
 <script type="text/javascript">
     document.getElementById("newTabBtn").onclick = function () {
@@ -18,31 +35,7 @@
     };
 </script>
 
-
-<div class="main">
-    <ul>
-        <!--
-            <?php foreach ($Grant_item->podwykonawcyUserModel as $podwyk ): ?>
-                <li>Tab: <?php echo $podwyk->imie . ' ' . $podwyk->nazwisko ?>
-                </li>
-            <?php endforeach ?>
--->
-
-        <h3>Nazwa: <?php echo $Grant_item->nazwa?> </h3>
-        <li>Opis: <?php echo $Grant_item->opis ?></li>
-        <li> Kategoria: <?php echo $Grant_item->kategoria->nazwa ?></li>
-        <li> Zalożyciel: <?php echo $Grant_item->zalozyciel->imie . ' ' . $Grant_item->zalozyciel->nazwisko ?> </li>
-
-        <li> Budzet: <?php echo $Grant_item->budzet ?></li>
-        <li> Czas rozpoczecia: <?php echo $Grant_item->czasRozpoczecia ?></li>
-
-        <li> Deadline: <?php echo $Grant_item->deadline ?></li>
-        <li> Czas rozliczenia: <?php echo $Grant_item->czasRozliczenia ?> tygodni</li>
-    </ul>
-
-</div>
-
-<form id="delete_form" method="post" action="<?php echo base_url() . 'grant/'; ?>delete">
+<form style="display:inline" id="delete_form" method="post" action="<?php echo base_url() . 'grant/'; ?>delete">
     <input type="hidden" name="idGrant" value="<?php echo $Grant_item->id; ?>" />
     <input type="submit" value="Usuń ten grant" />
 </form>
