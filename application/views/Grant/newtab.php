@@ -13,7 +13,7 @@ require_once('tabs_layout.php');
         <textarea id="opis" name="opis"  maxlength="500" value="" > </textarea>
 	<br />
 
-    <label for="owner">Właściciel zakładki&nbsp; &nbsp;</label>
+    <label for="owner">Właściciel zakładki <span style="color:red">*</span> </label>
         <select id="owner_select" name="owner_select">
         <?php
             foreach($Users as $u) {
