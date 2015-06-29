@@ -1,15 +1,12 @@
 <?php
 require_once('tabs_layout.php');
 ?>
-<br />
-<br />
-<br />
 <h3 id="tabName"></h3>
 
-<form id="delete_form" method="post" action="<?php echo base_url() . 'grant/'; ?>delete_tab">
+<form style="display:inline" id="delete_form" method="post" action="<?php echo base_url() . 'grant/'; ?>delete_tab">
     <input type="hidden" name="idGrant" value="<?php echo $Grant_item->id; ?>" />
     <input type="hidden" name="idZakladki" value="<?php echo $idZakladki; ?>" />
-    <input type="submit" value="Usuń zakładkę" />
+    <input type="submit" value="Usuń tę zakładkę" />
 </form>
 
 <input id="newWpis" type="submit" value="Dodaj wpis" onclick="$('#dialog').dialog('open');" />
@@ -24,7 +21,7 @@ require_once('tabs_layout.php');
 						
 						if($wpis['user_id'] == $logged_in['id']) {
 							?>
-								<form method="post" action="<?php echo base_url() . 'grant/'; ?>delete_wpis">
+								<form style="display:inline" method="post" action="<?php echo base_url() . 'grant/'; ?>delete_wpis">
 								    <input type="hidden" name="idGrant" value="<?php echo $Grant_item->id; ?>" />
 									<input type="hidden" name="idZakladki" value="<?php echo $idZakladki; ?>" />
 									<input type="hidden" name="wpisId" value="<?php echo $wpis['wpis_id']; ?>" />
